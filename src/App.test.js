@@ -3,4 +3,5 @@ import App from "./App";
 
 test("renders the app", () => {
   render(<App />);
+  expect(App).toBeTruthy();
 });
