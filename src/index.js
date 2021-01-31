@@ -4,12 +4,16 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import Context from "./context";
+
 import "semantic-ui-css/semantic.min.css";
-import "./index.css";
+import "./scss/main.scss";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Context>
+      <App />
+    </Context>
   </React.StrictMode>,
   document.getElementById("root")
 );
