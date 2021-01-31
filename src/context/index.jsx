@@ -4,11 +4,14 @@ const appContext = React.createContext();
 
 const initialValue = {
   user: null,
+  loading: false,
 };
 
-const actionTypes = {
+export const actionTypes = {
   LOGIN: "LOGIN",
   LOGOUT: "LOGOUT",
+  LOADING_START: "LOADING_START",
+  LOADING_END: "LOADING_END",
 };
 
 const reducer = (state, action) => {
@@ -22,6 +25,16 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: null,
+      };
+    case actionTypes.LOADING_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actionTypes.LOADING_END:
+      return {
+        ...state,
+        loading: false,
       };
     default:
       return state;

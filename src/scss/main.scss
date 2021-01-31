@@ -18,12 +18,10 @@ body {
 }
 
 .main {
-  color: $cp2;
-  background-color: $cd1;
+  color: $cl1;
   min-height: 100vh;
 
   &--light {
     color: $cp1;
-    background-color: $cl1;
   }
 }
