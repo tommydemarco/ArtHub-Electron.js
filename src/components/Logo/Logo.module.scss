@@ -1,9 +1,9 @@
 @import "../../scss/main.scss";
 
 .Logo {
-  &--1 {
-    @include logo1;
-  }
+  position: relative;
+  @include logo1;
+  text-align: center;
 
   &--2 {
     @include logo2;

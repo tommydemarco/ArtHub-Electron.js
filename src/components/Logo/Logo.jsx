@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 
 import { Link } from "react-router-dom";
 
-import css from "./Login.module.scss";
+import css from "./Logo.module.scss";
 
 const Logo = ({ element, variant }) => {
   const logoClasses = [css.Logo];
 
-  logo.push(css.Logo + "--" + variant);
+  logoClasses.push(css.Logo + "--" + variant);
 
   const Element = element;
   return <Element className={logoClasses.join(" ")}>MOTI-TASK</Element>;

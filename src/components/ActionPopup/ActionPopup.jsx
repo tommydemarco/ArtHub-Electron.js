@@ -1,22 +1,9 @@
-import React, { useState } from "react";
-
-import LoginForm from "../LoginForm";
-import RegisterForm from "../RegisterForm";
+import React from "react";
 
 import css from "./ActionPopup.module.scss";
 
 const ActionPopup = ({ children }) => {
-  const [login, setLogin] = useState(true);
-
-  return (
-    <div className={css.ActionPopup}>
-      {login ? (
-        <LoginForm changeMode={setLogin} />
-      ) : (
-        <RegisterForm changeMode={setLogin} />
-      )}
-    </div>
-  );
+  return <div className={css.ActionPopup}>{children}</div>;
 };
 
 export default ActionPopup;
