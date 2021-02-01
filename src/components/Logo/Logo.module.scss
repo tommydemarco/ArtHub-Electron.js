@@ -1,0 +1,15 @@
+@import "../../scss/main.scss";
+
+.Logo {
+  &--1 {
+    @include logo1;
+  }
+
+  &--2 {
+    @include logo2;
+  }
+
+  &--3 {
+    @include logo3;
+  }
+}
