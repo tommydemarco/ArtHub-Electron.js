@@ -5,6 +5,8 @@ import CustomInput from "../Input";
 const LoginForm = () => {
   const [userMail, setUserMail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+
+  console.log(userMail);
   return (
     <div>
       <CustomInput
@@ -13,6 +15,7 @@ const LoginForm = () => {
         value={userMail}
         setValue={setUserMail}
         full={true}
+        icon="at"
       />
       <CustomInput
         type="password"
@@ -20,6 +23,7 @@ const LoginForm = () => {
         value={userPassword}
         setValue={setUserPassword}
         full={true}
+        icon="key"
       />
     </div>
   );
