@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
+import { useTranslation } from "react-i18next";
+
+import Button from "../Button";
 import CustomInput from "../Input";
 
-const LoginForm = () => {
+const LoginForm = ({ changeMode }) => {
+  const [t] = useTranslation("global");
+
   const [userMail, setUserMail] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
-  console.log(userMail);
+  useEffect(() => {
+    console.log(t);
+  });
+
   return (
     <div>
       <CustomInput
         type="email"
-        placeholder="email"
+        placeholder={t("email")}
         value={userMail}
         setValue={setUserMail}
         full={true}
@@ -19,12 +27,16 @@ const LoginForm = () => {
       />
       <CustomInput
         type="password"
-        placeholder="password"
+        placeholder={t("password")}
         value={userPassword}
         setValue={setUserPassword}
         full={true}
         icon="key"
       />
+      <Button>{t("login")}</Button>
+      <Button secondary={true} onClick={() => changeMode(false)}>
+        {t("register-inst")}
+      </Button>
     </div>
   );
 };
