@@ -1,27 +1,28 @@
 import React from "react";
 
-import { Icon, Input } from "semantic-ui-react";
+import { Icon, Input as CustomInput } from "semantic-ui-react";
 
 import css from "./Input.module.scss";
 
-const CustomInput = ({ full, type, placeholder, value, setValue, icon }) => {
+const Input = ({ full, type, placeholder, value, setValue, icon, error }) => {
   const inputClasses = [css.Input];
 
   if (full === true) inputClasses.push(css["Input--full-width"]);
 
   return (
-    <Input
+    <CustomInput
       className={inputClasses.join(" ")}
       type={type}
       placeholder={placeholder}
       iconPosition="left"
       value={value}
       onChange={(e) => setValue(e.target.value)}
+      error={error}
     >
       {icon && <Icon name={icon} />}
       <input />
-    </Input>
+    </CustomInput>
   );
 };
 
-export default CustomInput;
+export default Input;
