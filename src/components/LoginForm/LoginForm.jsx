@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { useTranslation } from "react-i18next";
 
 import Button from "../Button";
 import CustomInput from "../Input";
+
+import css from "../../pages/Auth/Auth.module.scss";
 
 const LoginForm = ({ changeMode }) => {
   const [t] = useTranslation("global");
@@ -11,9 +13,7 @@ const LoginForm = ({ changeMode }) => {
   const [userMail, setUserMail] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
-  useEffect(() => {
-    console.log(t);
-  });
+  const handleAuthAction = () => {};
 
   return (
     <div>
@@ -33,10 +33,12 @@ const LoginForm = ({ changeMode }) => {
         full={true}
         icon="key"
       />
-      <Button>{t("login")}</Button>
-      <Button secondary={true} onClick={() => changeMode(false)}>
-        {t("register-inst")}
-      </Button>
+      <div className={css.Auth__group}>
+        <Button onClick={handleAuthAction}>{t("login")}</Button>
+        <Button secondary={true} onClick={() => changeMode(false)}>
+          {t("signup-inst")}
+        </Button>
+      </div>
     </div>
   );
 };

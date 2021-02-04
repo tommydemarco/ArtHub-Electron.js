@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+import { useTranslation } from "react-i18next";
+
+import Button from "../../components/Button";
 import LoginForm from "../../components/LoginForm";
 import Logo from "../../components/Logo";
 import RegisterForm from "../../components/RegisterForm";
@@ -9,7 +12,10 @@ import ActionPopup from "../../components/ActionPopup";
 import css from "./Auth.module.scss";
 
 const Auth = () => {
+  const [t] = useTranslation("global");
+
   const [login, setLogin] = useState(true);
+
   return (
     <>
       <VideoBackground />

@@ -1,17 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useRef } from "react";
+
+import firebase from "../../utils/firebase";
+import "firebase/auth";
 
 import { useTranslation } from "react-i18next";
+import { Form, Checkbox } from "semantic-ui-react";
 
 import Button from "../Button";
 import CustomInput from "../Input";
 
+import css from "../../pages/Auth/Auth.module.scss";
+
 const RegisterForm = ({ changeMode }) => {
-  const { t } = useTranslation("global");
+  const { t, i18n } = useTranslation("global");
+
+  const agreeButton = useMemo(
+    () => (
+      <>
+        {t("aknowledge")} <a>{t("t-c")}</a>
+      </>
+    ),
+    [i18n]
+  );
+
+  const handleAuthAction = (e) => {
+    e.preventDefault();
+    console.log("Hello");
+  };
+
+  const checkboxRef = useRef(null);
 
   const [userMail, setUserMail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   return (
-    <div>
+    <form onSubmit={handleAuthAction}>
       <CustomInput
         type="email"
         placeholder={t("email")}
@@ -36,11 +58,14 @@ const RegisterForm = ({ changeMode }) => {
         full={true}
         icon="key"
       />
-      <Button>{t("signup")}</Button>
-      <Button secondary={true} onClick={() => changeMode(true)}>
-        {t("login-inst")}
-      </Button>
-    </div>
+      <Checkbox label={{ children: agreeButton }} ref={checkboxRef} />
+      <div className={css.Auth__group}>
+        <Button type="submit">{t("signup")}</Button>
+        <Button secondary={true} onClick={() => changeMode(true)}>
+          {t("login-inst")}
+        </Button>
+      </div>
+    </form>
   );
 };
 

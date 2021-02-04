@@ -9,4 +9,11 @@
   &__forms {
     margin-top: 3rem;
   }
+
+  &__group {
+    display: flex;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 2rem;
+  }
 }
