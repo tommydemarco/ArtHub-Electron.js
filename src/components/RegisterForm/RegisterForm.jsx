@@ -3,6 +3,8 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import firebase from "../../utils/firebase";
 import "firebase/auth";
 
+import { toast } from "react-toastify";
+
 import { useTranslation } from "react-i18next";
 import { Checkbox } from "semantic-ui-react";
 import { validateEmail, validatePassword } from "../../utils/validations";
@@ -20,6 +22,7 @@ const RegisterForm = ({ changeMode }) => {
   const [userPassword, setUserPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const agreeButton = useMemo(
     () => (
@@ -54,11 +57,39 @@ const RegisterForm = ({ changeMode }) => {
     setErrors(errors);
 
     if (!formValid) return;
+
+    setIsLoading(true);
+
+    (async function (mail, password) {
+      try {
+        await firebase.auth().createUserWithEmailAndPassword(mail, password);
+        changeUserName();
+        sendVerificationEmail();
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setIsLoading(false);
+      }
+    })(userMail, userPassword);
   };
 
-  useEffect(() => {
-    console.log(errors);
-  });
+  const changeUserName = async () => {
+    try {
+      await firebase
+        .auth()
+        .currentUser.updateProfile({ displayName: userName });
+    } catch (e) {
+      //handle global error
+    }
+  };
+
+  const sendVerificationEmail = async () => {
+    try {
+      await firebase.auth().currentUser.sendEmailVerification();
+    } catch (e) {
+      //handle email error
+    }
+  };
 
   return (
     <form onSubmit={handleAuthAction}>
@@ -100,7 +131,9 @@ const RegisterForm = ({ changeMode }) => {
       />
       <Checkbox label={{ children: agreeButton }} ref={checkboxRef} />
       <div className={css.Auth__group}>
-        <Button type="submit">{t("signup")}</Button>
+        <Button type="submit" loading={isLoading}>
+          {t("signup")}
+        </Button>
         <Button secondary={true} onClick={() => changeMode(true)}>
           {t("login-inst")}
         </Button>

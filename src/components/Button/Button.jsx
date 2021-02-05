@@ -3,7 +3,14 @@ import { Button as SemanticButton } from "semantic-ui-react";
 
 import css from "./Button.module.scss";
 
-const Button = ({ isLink, onClick, children, secondary, className }) => {
+const Button = ({
+  isLink,
+  onClick,
+  children,
+  secondary,
+  className,
+  loading,
+}) => {
   const classes = [css.Button];
 
   if (typeof className === "string" && className.length) {
@@ -17,6 +24,7 @@ const Button = ({ isLink, onClick, children, secondary, className }) => {
       onClick={onClick}
       className={css.Button}
       primary={!secondary}
+      loading={loading}
     >
       {children}
     </Element>
