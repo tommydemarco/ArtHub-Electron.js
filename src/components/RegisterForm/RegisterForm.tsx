@@ -14,7 +14,7 @@ import CustomInput from "../Input";
 
 import css from "../../pages/Auth/Auth.module.scss";
 
-const RegisterForm = ({ changeMode }) => {
+const RegisterForm = ({ changeMode }): JSX.Element => {
   const { t, i18n } = useTranslation("global");
 
   const [userName, setUserName] = useState("");

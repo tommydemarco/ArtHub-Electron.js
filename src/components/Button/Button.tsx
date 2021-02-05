@@ -1,16 +1,18 @@
-import React from "react";
 import { Button as SemanticButton } from "semantic-ui-react";
 
 import css from "./Button.module.scss";
 
-const Button = ({
-  isLink,
-  onClick,
-  children,
-  secondary,
-  className,
-  loading,
-}) => {
+interface Props {
+  isLink: boolean;
+  onClick: Function;
+  children: JSX.Element[] | JSX.Element;
+  secondary: boolean;
+  className: string;
+  loading: boolean;
+}
+
+const Button = (props: Props): JSX.Element => {
+  const { isLink, onClick, children, secondary, className, loading } = props;
   const classes = [css.Button];
 
   if (typeof className === "string" && className.length) {
@@ -21,8 +23,7 @@ const Button = ({
   return (
     <Element
       className={classes.join(" ")}
-      onClick={onClick}
-      className={css.Button}
+      onClick={(e: Event) => onClick(e)}
       primary={!secondary}
       loading={loading}
     >

@@ -7,7 +7,7 @@ import CustomInput from "../Input";
 
 import css from "../../pages/Auth/Auth.module.scss";
 
-const LoginForm = ({ changeMode }) => {
+const LoginForm = ({ changeMode }): JSX.Element => {
   const [t] = useTranslation("global");
 
   const [userMail, setUserMail] = useState("");

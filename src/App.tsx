@@ -7,7 +7,7 @@ import { appContext, actionTypes } from "./context";
 
 import Auth from "./pages/Auth/Auth";
 
-function App() {
+function App(): JSX.Element {
   const { dispatch } = useContext(appContext);
 
   useEffect(() => {

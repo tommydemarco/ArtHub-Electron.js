@@ -4,7 +4,15 @@ import { Icon, Input as CustomInput } from "semantic-ui-react";
 
 import css from "./Input.module.scss";
 
-const Input = ({ full, type, placeholder, value, setValue, icon, error }) => {
+const Input = ({
+  full,
+  type,
+  placeholder,
+  value,
+  setValue,
+  icon,
+  error,
+}): JSX.Element => {
   const inputClasses = [css.Input];
 
   if (full === true) inputClasses.push(css["Input--full-width"]);
