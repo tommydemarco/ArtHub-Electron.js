@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import firebase from "./utils/firebase";
 import "firebase/auth";
@@ -10,13 +10,16 @@ import Auth from "./pages/Auth/Auth";
 function App() {
   const { dispatch } = useContext(appContext);
 
-  // firebase.auth().onAuthStateChanged((currentUser) => {
-  //   if (currentUser) {
-  //     dispatch({ type: actionTypes.LOGIN, payload: currentUser });
-  //   } else {
-  //     dispatch({ type: actionTypes.LOGOUT });
-  //   }
-  // });
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((currentUser) => {
+      if (currentUser && currentUser?.emailVerified) {
+        dispatch({ type: actionTypes.LOGIN, payload: currentUser });
+      } else {
+        dispatch({ type: actionTypes.LOGOUT });
+      }
+      console.log(currentUser);
+    });
+  }, []);
 
   return (
     <div className="main">

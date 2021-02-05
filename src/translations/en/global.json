@@ -5,5 +5,8 @@
   "signup": "Sign up",
   "email": "email",
   "password": "password",
-  "rep-password": "repeat your password"
+  "rep-password": "repeat your password",
+  "signup-success": "Thanks for signing up! Veryfy your email address and proceed to sign in!",
+  "email-taken": "This email has already been taken",
+  "generic-signup-error": "Ups, there was a problem signing you up, try again later"
 }

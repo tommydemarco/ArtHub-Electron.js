@@ -65,8 +65,11 @@ const RegisterForm = ({ changeMode }) => {
         await firebase.auth().createUserWithEmailAndPassword(mail, password);
         changeUserName();
         sendVerificationEmail();
+        toast.success(t("signup-success"));
       } catch (e) {
-        console.log(e);
+        if (e?.code === "auth/email-already-in-use")
+          toast.error(t("email-taken"));
+        else toast.error(t("generic-signup-error"));
       } finally {
         setIsLoading(false);
       }
