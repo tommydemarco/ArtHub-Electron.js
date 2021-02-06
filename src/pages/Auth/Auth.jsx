@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { useTranslation } from "react-i18next";
 
-import Button from "../../components/Button";
 import LoginForm from "../../components/LoginForm";
 import Logo from "../../components/Logo";
 import RegisterForm from "../../components/RegisterForm";

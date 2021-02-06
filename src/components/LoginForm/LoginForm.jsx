@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 
+import firebase from "../../utils/firebase";
+import "firebase/auth";
+
+import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+
+import { validateEmail, validatePassword } from "../../utils/validations";
 
 import Button from "../Button";
 import CustomInput from "../Input";
 
 import css from "../../pages/Auth/Auth.module.scss";
 
-const LoginForm = ({ changeMode }): JSX.Element => {
+const LoginForm = ({ changeMode }) => {
   const [t] = useTranslation("global");
 
   const [userMail, setUserMail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleAuthAction = (e) => {
     e.preventDefault();
@@ -35,14 +43,13 @@ const LoginForm = ({ changeMode }): JSX.Element => {
     setIsLoading(true);
 
     (async function (mail, password) {
+      setIsLoading(true);
       try {
-        await firebase.auth().createUserWithEmailAndPassword(mail, password);
-        changeUserName();
-        sendVerificationEmail();
-        toast.success(t("signup-success"));
+        await firebase.auth().signInWithEmailAndPassword(mail, password);
       } catch (e) {
-        if (e?.code === "auth/email-already-in-use")
-          toast.error(t("email-taken"));
+        console.log(e.code);
+        if (e?.code === "auth/user-not-found")
+          toast.error(t("wrong-credentials"));
         else toast.error(t("generic-signup-error"));
       } finally {
         setIsLoading(false);
@@ -59,6 +66,7 @@ const LoginForm = ({ changeMode }): JSX.Element => {
         setValue={setUserMail}
         full={true}
         icon="at"
+        error={errors.email}
       />
       <CustomInput
         type="password"
@@ -67,9 +75,12 @@ const LoginForm = ({ changeMode }): JSX.Element => {
         setValue={setUserPassword}
         full={true}
         icon="key"
+        error={errors.password}
       />
       <div className={css.Auth__group}>
-        <Button onClick={handleAuthAction}>{t("login")}</Button>
+        <Button onClick={handleAuthAction} loading={isLoading}>
+          {t("login")}
+        </Button>
         <Button secondary={true} onClick={() => changeMode(false)}>
           {t("signup-inst")}
         </Button>

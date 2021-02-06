@@ -41,6 +41,7 @@ ReactDOM.render(
             pauseOnFocusLoss
             draggable
             pauseOnHover
+            preventDuplicates={true}
           />
           {/* Same as */}
           <ToastContainer />

@@ -4,7 +4,7 @@ import BackgroundVideo from "../../static/assets/videos/bg.mp4";
 
 import css from "./VideoBackground.module.scss";
 
-const VideoBackground = (): JSX.Element => {
+const VideoBackground = () => {
   return (
     <div className={css.VideoBackground__container}>
       <video autoPlay muted loop className={css.VideoBackground}>

@@ -14,7 +14,7 @@ import CustomInput from "../Input";
 
 import css from "../../pages/Auth/Auth.module.scss";
 
-const RegisterForm = ({ changeMode }): JSX.Element => {
+const RegisterForm = ({ changeMode }) => {
   const { t, i18n } = useTranslation("global");
 
   const [userName, setUserName] = useState("");
@@ -66,7 +66,6 @@ const RegisterForm = ({ changeMode }): JSX.Element => {
         changeUserName();
         sendVerificationEmail();
         toast.success(t("signup-success"));
-        await firebase.auth().signOut();
         changeMode(true);
       } catch (e) {
         if (e?.code === "auth/email-already-in-use")
